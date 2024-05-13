@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Send Message</h2>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <select name="selectedOption">
+        <option value="orange">Orange</option>
+        <option value="green">Green</option>
+        <option value="black">Black</option>
+    </select>
+    <br />
+    <section name="message" rows="4" cols="50"></section>
+    <br />
+    <button style="width:50px;height:50px;" type="submit" value="Send">Send</button>
+}

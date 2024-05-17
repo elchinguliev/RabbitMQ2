@@ -1,20 +1,22 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<h2>Received Messages</h2>
+
+<h2>Send Message</h2>
 
 @using (Html.BeginForm())
 {
-    <select name="selectedOption">
-        <option value="orange">Orange</option>
-        <option value="green">Green</option>
-        <option value="black">Black</option>
-    </select>
+    <label><input type="checkbox" name="selectedOption" value="orange"> Orange</label>
+    <br>
+    <label><input type="checkbox" name="selectedOption" value="green"> Green</label>
+    <br>
+    <label><input type="checkbox" name="selectedOption" value="black"> Black</label>
+    <br>
+
     <br />
     <button type="submit">Filter</button>
-}
 
-<hr />
+}
 
 <h3>Messages</h3>
 <ul>

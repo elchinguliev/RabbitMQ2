@@ -14,7 +14,6 @@ namespace Consumer.Controllers
         //    return View(new MessageViewModel());
         //}
 
-        [HttpPost]
         public ActionResult Index(string selectedOption="orange")
         {
             var messages = ReceiveMessages(selectedOption);
@@ -39,15 +38,23 @@ namespace Consumer.Controllers
 
                 channel.QueueBind(queue: queueName, exchange: "topic_exchange", routingKey: selectedOption);
 
-                var consumer = new EventingBasicConsumer(channel);
-                consumer.Received += (model, ea) =>
-                {
-                    var body = ea.Body.ToArray();
-                    var message = Encoding.UTF8.GetString(body);
-                    messages.Add(message);
-                };
+                //var consumer = new EventingBasicConsumer(channel);
+                //consumer.Received += (model, ea) =>
+                //{
+                //    var body = ea.Body.ToArray();
+                //var message = Encoding.UTF8.GetString(body);
+                //messages.Add(message);
+                //};
 
-                channel.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
+                //channel.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
+                var data=channel.BasicGet(queueName, true);
+                if (data != null)
+                {
+
+                var message = Encoding.UTF8.GetString(data.Body.ToArray());
+                messages.Add(message);
+                }
+
             }
 
             return messages;
